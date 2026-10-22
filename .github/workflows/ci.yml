@@ -39,9 +39,9 @@ jobs:
           - lint: fmt
             args: " --all -- --check"
     steps:
-      - uses: actions/checkout@v3
-      - uses: rui314/setup-mold@v1 # faster linker
-      - uses: actions/cache@v3
+      - uses: actions/checkout@a37ce9120846195fa4ece8f58b268e6043cb2f26 # v3
+      - uses: rui314/setup-mold@339e96b4ff1f3bd865856ba4cbbe8818a7acb038 # v1
+      - uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c # v3
         with:
           path: |
             ~/.cargo/bin/
@@ -51,7 +51,7 @@ jobs:
             target
           key: ${{ runner.os }}-${{ matrix.lint }}-${{ hashFiles('**/Cargo.lock') }}
           restore-keys: ${{ runner.OS }}-${{ matrix.lint }}-
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@b725eda525362e7cf34af9a7243cac1e3f01a7ec # stable
         with:
           components: clippy,rustfmt
       - run: cargo ${{ matrix.lint }}${{ matrix.args }}
